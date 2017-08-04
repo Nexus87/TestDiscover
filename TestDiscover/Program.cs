@@ -3,27 +3,17 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using LibGit2Sharp;
+using TestDiscover.Lib;
 
 namespace TestDiscover
 {
     internal class Program
     {
         private const string Solution = "TestProject.sln";
-        private const string git = @"C:\Users\Kevin\Documents\Visual Studio 2017\Projects\TestProject\";
+        private const string git = @"C:\Users\Kevin\Documents\Visual Studio 2017\Projects\TestDiscover\TestDiscover.Tests\TestProject";
         private const string FirstTag = "initial";
         private const string SecondTag = "new";
 
-        private static string CheckoutTag(string tag)
-        {
-            var cloneDir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
-            var repoPath = LibGit2Sharp.Repository.Clone(git, cloneDir);
-            var rep = new LibGit2Sharp.Repository(repoPath);
-            var commit = rep.Tags.SingleOrDefault(x => x.FriendlyName == tag)?.Reference.TargetIdentifier;
-            Commands.Checkout(rep, commit);
-
-            return cloneDir;
-        }
 
         private static List<string> GetTestList(string solutionName, Action<Repository> checkoutMethod)
         {

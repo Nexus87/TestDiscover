@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using LibGit2Sharp;
 
-namespace TestDiscover
+namespace TestDiscover.Lib
 {
     public class Repository : IDisposable
     {
@@ -17,7 +17,7 @@ namespace TestDiscover
         }
 
         public string Clone()
-        {
+        {            
             _cloneDir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
             var repoPath = LibGit2Sharp.Repository.Clone(_repo, _cloneDir);
             _repository = new LibGit2Sharp.Repository(repoPath);
@@ -48,6 +48,11 @@ namespace TestDiscover
         public void Dispose()
         {
             Remove();
+        }
+
+        public void CheckoutHash(string hash)
+        {
+            Commands.Checkout(_repository, hash);
         }
     }
 }

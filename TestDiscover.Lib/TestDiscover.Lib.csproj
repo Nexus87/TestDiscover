@@ -5,16 +5,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FF014DFC-436F-4159-85A0-AC1FD362594C}</ProjectGuid>
+    <ProjectGuid>{0622F924-F6C2-466D-A372-32F6A0F441A4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TestDiscover.Tests</RootNamespace>
-    <AssemblyName>TestDiscover.Tests</AssemblyName>
+    <RootNamespace>TestDiscover.Lib</RootNamespace>
+    <AssemblyName>TestDiscover.Lib</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,12 +37,6 @@
     <Reference Include="Esent.Interop, Version=1.9.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\ManagedEsent.1.9.4\lib\net40\Esent.Interop.dll</HintPath>
     </Reference>
-    <Reference Include="FluentAssertions, Version=4.19.3.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentAssertions.4.19.3\lib\net45\FluentAssertions.dll</HintPath>
-    </Reference>
-    <Reference Include="FluentAssertions.Core, Version=4.19.3.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentAssertions.4.19.3\lib\net45\FluentAssertions.Core.dll</HintPath>
-    </Reference>
     <Reference Include="LibGit2Sharp, Version=0.24.0.0, Culture=neutral, PublicKeyToken=7cbde695407f0333, processorArchitecture=MSIL">
       <HintPath>..\packages\LibGit2Sharp.0.24.0\lib\net40\LibGit2Sharp.dll</HintPath>
     </Reference>
@@ -60,9 +54,6 @@
     </Reference>
     <Reference Include="Microsoft.CodeAnalysis.Workspaces.Desktop, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeAnalysis.Workspaces.Common.2.3.1\lib\net46\Microsoft.CodeAnalysis.Workspaces.Desktop.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework, Version=3.7.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.7.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.AppContext, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -164,24 +155,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commit.cs" />
-    <Compile Include="RepositoryTests.cs" />
+    <Compile Include="ClassVirtualizationVisitor.cs" />
+    <Compile Include="DirectoryHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SolutionScannerTests.cs" />
+    <Compile Include="Repository.cs" />
+    <Compile Include="SolutionScanner.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TestDiscover.Lib\TestDiscover.Lib.csproj">
-      <Project>{0622F924-F6C2-466D-A372-32F6A0F441A4}</Project>
-      <Name>TestDiscover.Lib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TestDiscover\TestDiscover.csproj">
-      <Project>{5b469e33-48b5-4479-83f6-54a979c66050}</Project>
-      <Name>TestDiscover</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />

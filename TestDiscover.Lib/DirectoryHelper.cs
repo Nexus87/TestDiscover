@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 
-namespace TestDiscover
+namespace TestDiscover.Lib
 {
     public static class DirectoryHelper
     {

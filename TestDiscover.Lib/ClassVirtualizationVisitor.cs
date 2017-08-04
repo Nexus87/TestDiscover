@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 
-namespace TestDiscover
+namespace TestDiscover.Lib
 {
-    class ClassVirtualizationVisitor : SymbolVisitor
+    public class ClassVirtualizationVisitor : SymbolVisitor
     {
 
         public List<INamedTypeSymbol> Classes { get; set; } = new List<INamedTypeSymbol>();

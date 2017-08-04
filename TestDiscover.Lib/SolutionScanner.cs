@@ -3,14 +3,14 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.MSBuild;
 
-namespace TestDiscover
+namespace TestDiscover.Lib
 {
-    class SolutionScanner
+    public class SolutionScanner
     {
+        private const string FactMetadataName = "Fact";
+        private const string TheoryMetaDataName = "Theory";
         private readonly Solution _solution;
 
-        private const string FactMetadataName = "FactAttribute";
-        private const string TheoryMetaDataName = "TheoryAttribute";
         public SolutionScanner(string solutionPath)
         {
             var msWorkspace = MSBuildWorkspace.Create();
@@ -26,7 +26,6 @@ namespace TestDiscover
             {
                 var compilation = project.GetCompilationAsync().Result;
                 classVisitor.Visit(compilation.Assembly.GlobalNamespace);
-
             }
 
             return classVisitor.Classes.SelectMany(x => x.GetMembers())
@@ -34,7 +33,6 @@ namespace TestDiscover
                             && HasFactOrTheoryAttribute(x))
                 .Select(x => x.ToString())
                 .ToList();
-
         }
 
         private static bool HasFactOrTheoryAttribute(ISymbol symbol)
