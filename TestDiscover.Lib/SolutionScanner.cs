@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.MSBuild;
 
@@ -7,8 +8,6 @@ namespace TestDiscover.Lib
 {
     public class SolutionScanner
     {
-        private const string FactMetadataName = "Fact";
-        private const string TheoryMetaDataName = "Theory";
         private readonly Solution _solution;
 
         public SolutionScanner(string solutionPath)
@@ -22,24 +21,12 @@ namespace TestDiscover.Lib
         {
             var classVisitor = new ClassVirtualizationVisitor();
 
-            foreach (var project in _solution.Projects)
-            {
-                var compilation = project.GetCompilationAsync().Result;
-                classVisitor.Visit(compilation.Assembly.GlobalNamespace);
-            }
+            Parallel.ForEach(_solution.Projects,
+                x => classVisitor.Visit(x.GetCompilationAsync().Result.Assembly.GlobalNamespace));
 
-            return classVisitor.Classes.SelectMany(x => x.GetMembers())
-                .Where(x => x.Kind == SymbolKind.Method
-                            && HasFactOrTheoryAttribute(x))
+            return classVisitor.Methods
                 .Select(x => x.ToString())
                 .ToList();
-        }
-
-        private static bool HasFactOrTheoryAttribute(ISymbol symbol)
-        {
-            return symbol.GetAttributes().Any(y =>
-                y.AttributeClass.MetadataName == FactMetadataName ||
-                y.AttributeClass.MetadataName == TheoryMetaDataName);
         }
     }
 }
