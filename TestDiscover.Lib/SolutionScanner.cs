@@ -19,7 +19,7 @@ namespace TestDiscover.Lib
 
         public List<string> Scan()
         {
-            var classVisitor = new ClassVirtualizationVisitor();
+            var classVisitor = new TestMethodVisitor();
 
             Parallel.ForEach(_solution.Projects,
                 x => classVisitor.Visit(x.GetCompilationAsync().Result.Assembly.GlobalNamespace));

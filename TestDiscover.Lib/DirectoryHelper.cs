@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -9,32 +8,7 @@ namespace TestDiscover.Lib
 {
     public static class DirectoryHelper
     {
-        private static readonly Dictionary<string, string> ToRename = new Dictionary<string, string>
-        {
-            { "dot_git", ".git" },
-            { "gitmodules", ".gitmodules" },
-        };
-
-        private static readonly Type[] whitelist = { typeof(IOException), typeof(UnauthorizedAccessException) };
-
-        public static void CopyFilesRecursively(DirectoryInfo source, DirectoryInfo target)
-        {
-            // From http://stackoverflow.com/questions/58744/best-way-to-copy-the-entire-contents-of-a-directory-in-c/58779#58779
-
-            foreach (DirectoryInfo dir in source.GetDirectories())
-            {
-                CopyFilesRecursively(dir, target.CreateSubdirectory(Rename(dir.Name)));
-            }
-            foreach (FileInfo file in source.GetFiles())
-            {
-                file.CopyTo(Path.Combine(target.FullName, Rename(file.Name)));
-            }
-        }
-
-        private static string Rename(string name)
-        {
-            return ToRename.ContainsKey(name) ? ToRename[name] : name;
-        }
+        private static readonly Type[] Whitelist = { typeof(IOException), typeof(UnauthorizedAccessException) };
 
         public static void DeleteDirectory(string directoryPath)
         {
@@ -42,7 +16,7 @@ namespace TestDiscover.Lib
 
             if (!Directory.Exists(directoryPath))
             {
-                Trace.WriteLine(string.Format("Directory '{0}' is missing and can't be removed.", directoryPath));
+                Trace.WriteLine($"Directory '{directoryPath}' is missing and can't be removed.");
                 return;
             }
             NormalizeAttributes(directoryPath);
@@ -78,7 +52,7 @@ namespace TestDiscover.Lib
                 {
                     var caughtExceptionType = ex.GetType();
 
-                    if (!whitelist.Any(knownExceptionType => knownExceptionType.IsAssignableFrom(caughtExceptionType)))
+                    if (!Whitelist.Any(knownExceptionType => knownExceptionType.IsAssignableFrom(caughtExceptionType)))
                     {
                         throw;
                     }

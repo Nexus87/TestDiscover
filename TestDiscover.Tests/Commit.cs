@@ -9,7 +9,6 @@ namespace TestDiscover.Tests
         public const string Namespace = "TestProject.";
         public const string Solution = "TestProject.sln";
         public static readonly string RepoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\TestProject");
-        public static readonly string SolutionPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\TestProject\TestProject.sln");
     }
 
     internal class Commit

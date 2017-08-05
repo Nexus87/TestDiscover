@@ -1,9 +1,5 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Reflection;
+﻿using System.Linq;
 using FluentAssertions;
-using LibGit2Sharp;
 using NUnit.Framework;
 using Repository = TestDiscover.Lib.Repository;
 

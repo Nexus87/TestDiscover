@@ -7,12 +7,10 @@ using TestDiscover.Lib;
 
 namespace TestDiscover
 {
-    internal class Program
+    internal static class Program
     {
         private const string Solution = "TestProject.sln";
         private const string git = @"C:\Users\Kevin\Documents\Visual Studio 2017\Projects\TestDiscover\TestDiscover.Tests\TestProject";
-        private const string FirstTag = "initial";
-        private const string SecondTag = "new";
 
 
         private static List<string> GetTestList(string solutionName, Action<Repository> checkoutMethod)
@@ -44,6 +42,7 @@ namespace TestDiscover
         }
         public static void Main(string[] args)
         {
+            
             //Compare(repo => repo.CheckoutTag(FirstTag), repo => repo.CheckoutTag(SecondTag))
                 //.Wait();
             Compare(repo => repo.CheckoutTagFromEnd(1), repo => repo.CheckoutTagFromEnd(0)).Wait();
