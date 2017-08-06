@@ -17,7 +17,7 @@ namespace TestDiscover.Tests
         {
             new Commit
             {
-                Sha1Hash = "ea146c0d7dff2d46d2b87fbbb28f14b4419b901a",
+                Sha1Hash = "7c75579b683a9f5e96b69edb46c86b378f7cd134",
                 Tag = "initial",
                 Functions = new List<string>
                 {
@@ -27,7 +27,7 @@ namespace TestDiscover.Tests
             },
             new Commit
             {
-                Sha1Hash = "0533e77fc72c686c16becb419c3d25f5aa68b8e3",
+                Sha1Hash = "400813d461ece9f108529ed8577560a54c34d841",
                 Tag = "second",
                 Functions = new List<string>
                 {
@@ -39,7 +39,7 @@ namespace TestDiscover.Tests
             },
             new Commit
             {
-                Sha1Hash = "6120d65b8b3aca596483f1fb8ac4d6fda2b59875",
+                Sha1Hash = "751bfa5c1a389a967ee438f74e27edc62f990032",
                 Tag = "third",
                 Functions = new List<string>
                 {
