@@ -13,13 +13,16 @@ namespace TestDiscover
     {
         private static string _solution;
         private static string _gitRepo;
+        private static string _passwd;
+        private static string _username;
 
 
         private static List<string> GetTestList(Action<Repository> checkoutMethod)
         {
             using (var repo = new Repository(_gitRepo))
             {
-                var path = repo.Clone();
+                
+                var path =!string.IsNullOrWhiteSpace(_username) ? repo.Clone(_username, _passwd) : repo.Clone();
                 checkoutMethod(repo);
 
                 var solution = Directory.GetFiles(path, _solution, SearchOption.AllDirectories).First();
@@ -78,7 +81,8 @@ namespace TestDiscover
             var result = p.Parse(args);
             _gitRepo =  ConfigurationManager.AppSettings["git"];
             _solution = ConfigurationManager.AppSettings["solution"];
-
+            _username = ConfigurationManager.AppSettings["user"];
+            _passwd = ConfigurationManager.AppSettings["passwd"];
             if (string.IsNullOrWhiteSpace(_gitRepo) || string.IsNullOrWhiteSpace(_solution))
             {
                 Console.WriteLine("Please configure the git and solution options in App.config");

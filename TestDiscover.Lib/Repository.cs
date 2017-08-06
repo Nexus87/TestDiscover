@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using LibGit2Sharp;
+using LibGit2Sharp.Handlers;
 
 namespace TestDiscover.Lib
 {
@@ -16,10 +17,19 @@ namespace TestDiscover.Lib
             _repo = repo;
         }
 
-        public string Clone()
+        public string Clone(string username, string password)
+        {
+            var co = new CloneOptions
+            {
+                CredentialsProvider = (url, user, cred) =>
+                    new UsernamePasswordCredentials {Username = username, Password = password}
+            };
+            return Clone(co);
+        }
+        public string Clone(CloneOptions options = null)
         {            
             _cloneDir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
-            var repoPath = LibGit2Sharp.Repository.Clone(_repo, _cloneDir);
+            var repoPath = LibGit2Sharp.Repository.Clone(_repo, _cloneDir, options);
             _repository = new LibGit2Sharp.Repository(repoPath);
 
             return _cloneDir;
