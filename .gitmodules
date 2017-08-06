@@ -1,3 +1,0 @@
-[submodule "TestDiscover.Tests/TestProject"]
-	path = TestDiscover.Tests/TestProject
-	url = git://github.com/Nexus87/TestProject.git
